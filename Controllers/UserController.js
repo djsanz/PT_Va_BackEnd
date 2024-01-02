@@ -14,7 +14,6 @@ async function GetUserMe (req, res) {
 }
 
 function GetAll (req, res) {
-    if (req.body.password !== 'GetAllUsers') return res.status(401).send('Unauthorized')
     User.find({}, { password: 0 })
         .then(data => { res.send(data) })
         .catch(err => { res.send(err) })
