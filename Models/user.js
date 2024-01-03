@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
     dorsal: {
-        type: String,
+        type: Number,
         unique: true,
         required: true
     },

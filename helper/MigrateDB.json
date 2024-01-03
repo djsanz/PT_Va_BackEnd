@@ -1,40 +1,97 @@
 {
     "jugadores": [
         {
-            "dorsal": "1",
+            "dorsal": 1,
             "nombre": "Jordi Masip",
             "posicion": "Portero",
             "password": "1234"
         },
         {
-            "dorsal": "25",
+            "dorsal": 25,
             "nombre": "John",
             "posicion": "Portero",
             "password": "1234"
         },
         {
-            "dorsal": "2",
+            "dorsal": 2,
             "nombre": "Luis Pérez",
             "posicion": "Defensa",
             "password": "1234"
         },
         {
-            "dorsal": "4",
+            "dorsal": 4,
             "nombre": "Víctor Meseguer",
             "posicion": "Centrocampista",
             "password": "1234"
         },
         {
-            "dorsal": "7",
+            "dorsal": 7,
             "nombre": "Sylla",
             "posicion": "Delantero",
             "password": "1234"
         },
         {
-            "dorsal": "0",
+            "dorsal": 0,
             "nombre": "Administrador",
             "posicion": "Admin",
             "password": "1234"
+        }
+    ],
+    "query": [
+        {
+            "orden": 0,
+            "pregunta": "Fatiga",
+            "opciones": [
+                "Siempre cansado",
+                "Más cansado que lo normal",
+                "Normal",
+                "Fresco",
+                "Muy fresco"
+            ]
+        },
+        {
+            "orden": 1,
+            "pregunta": "Calidad de sueño",
+            "opciones": [
+                "Insomnio",
+                "Sin dormir",
+                "Dificultades para conciliar el sueño",
+                "Bien",
+                "Muy descansado"
+            ]
+        },
+        {
+            "orden": 2,
+            "pregunta": "Dolor muscular general",
+            "opciones": [
+                "Muy estresado",
+                "Estresado",
+                "Normal",
+                "Bien",
+                "Muy bien"
+            ]
+        },
+        {
+            "orden": 3,
+            "pregunta": "Niveles de estrés",
+            "opciones": [
+                "Muy estresado",
+                "Estresado",
+                "Normal",
+                "Relajado",
+                "Muy relajado"
+            ]
+        },
+        {
+            "orden": 4,
+            "pregunta": "Estado anímico",
+            "opciones": [
+                "Muy enojado, irritable o deprimido",
+                "Irritable con los compañeros o la familia",
+                "Menos interesado en actividades que lo normal",
+                "Generalmente de buen humor",
+                "Ánimo muy positivo"
+            ]
         }
     ]
 }
