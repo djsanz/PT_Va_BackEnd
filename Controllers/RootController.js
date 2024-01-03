@@ -16,6 +16,7 @@ async function MigrateDB (req, res) {
     const Funciones = require('../helper/funciones')
     const User = require('../Models/user')
     const Query = require('../Models/query')
+    const Encuesta = require('../Models/encuesta')
     try {
         const fs = require('fs')
         const FileData = fs.readFileSync('./helper/MigrateDB.json', 'utf8')
@@ -35,9 +36,34 @@ async function MigrateDB (req, res) {
             const query = new Query(pregunta)
             await query.save()
         }
+        // Cargo Encuestas
+        const ListaUsuarios = await User.find({}, { password: 0 })
+        const ListaPreguntas = await Query.find({})
+        await Encuesta.deleteMany({})
+        for (let i = 1; i < 15; i++) {
+            const fecha = new Date()
+            fecha.setDate(fecha.getDate() - i)
+            for (const Usuario of ListaUsuarios) {
+                if (Usuario.dorsal === 0) continue
+                const EncuestaTemp = {
+                    fecha,
+                    userId: Usuario._id,
+                    respuestas: []
+                }
+                for (const Pregunta of ListaPreguntas) {
+                    EncuestaTemp.respuestas.push({
+                        queryId: Pregunta._id,
+                        respuesta: Funciones.getRandomInt(0, Pregunta.opciones.length - 1)
+                    })
+                }
+                const encuesta = new Encuesta(EncuestaTemp)
+                await encuesta.save()
+            }
+        }
+
         res.status(200).send('Migracion completa OK')
-    } catch {
-        res.status(500).send('Error, fallo al leer fichero MigrateDB.json')
+    } catch (error) {
+        res.status(500).send(error.message)
     }
 }
 

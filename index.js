@@ -25,6 +25,7 @@ app.use('/', require('./api/RootApi'))
 app.use('/login', require('./api/LoginApi'))
 app.use('/user', require('./api/UserApi'))
 app.use('/query', require('./api/QueryApi'))
+app.use('/encuesta', require('./api/EncuestaApi'))
 
 // Default 404 Error
 app.use(express.static('Views'), function (req, res) {

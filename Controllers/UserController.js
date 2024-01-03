@@ -1,5 +1,6 @@
 const Funciones = require('../helper/funciones')
 const User = require('../Models/user')
+const EncuestaModel = require('../Models/encuesta')
 const { GetTokenAccount } = require('../Middleware/AuthMiddleware')
 
 async function GetUserMe (req, res) {
@@ -7,6 +8,17 @@ async function GetUserMe (req, res) {
     if (!id) return res.status(401).send('Unauthorized')
     try {
         const result = await User.findOne({ _id: id }, { password: 0 })
+        res.status(200).send(result)
+    } catch {
+        res.status(500).send('Error')
+    }
+}
+
+async function GetEncuestasUser (req, res) {
+    const id = GetTokenAccount(req)
+    if (!id) return res.status(401).send('Unauthorized')
+    try {
+        const result = await EncuestaModel.find({ userId: id }, { userId: 0, 'respuestas._id': 0 }).populate('respuestas.queryId', { _id: 0 })
         res.status(200).send(result)
     } catch {
         res.status(500).send('Error')
@@ -39,6 +51,7 @@ async function Delete (req, res) {
 }
 
 module.exports = {
+    GetEncuestasUser,
     GetUserMe,
     GetAll,
     Create,
