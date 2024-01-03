@@ -1,0 +1,40 @@
+{
+    "jugadores": [
+        {
+            "dorsal": "1",
+            "nombre": "Jordi Masip",
+            "posicion": "Portero",
+            "password": "1234"
+        },
+        {
+            "dorsal": "25",
+            "nombre": "John",
+            "posicion": "Portero",
+            "password": "1234"
+        },
+        {
+            "dorsal": "2",
+            "nombre": "Luis Pérez",
+            "posicion": "Defensa",
+            "password": "1234"
+        },
+        {
+            "dorsal": "4",
+            "nombre": "Víctor Meseguer",
+            "posicion": "Centrocampista",
+            "password": "1234"
+        },
+        {
+            "dorsal": "7",
+            "nombre": "Sylla",
+            "posicion": "Delantero",
+            "password": "1234"
+        },
+        {
+            "dorsal": "0",
+            "nombre": "Administrador",
+            "posicion": "Admin",
+            "password": "1234"
+        }
+    ]
+}

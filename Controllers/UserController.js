@@ -41,43 +41,22 @@ async function Delete (req, res) {
 
 async function MigrateDB (req, res) {
     if (req.body.password !== 'MigraDB') return res.status(401).send('Unauthorized')
-    await User.deleteMany({})
-    const user1 = new User({
-        dorsal: '1',
-        nombre: 'Jordi Masip',
-        posicion: 'Portero',
-        password: await Funciones.Encrypt('1234')
-    })
-    const user2 = new User({
-        dorsal: '25',
-        nombre: 'John',
-        posicion: 'Portero',
-        password: await Funciones.Encrypt('1234')
-    })
-    const user3 = new User({
-        dorsal: '2',
-        nombre: 'Luis Pérez',
-        posicion: 'Defensa',
-        password: await Funciones.Encrypt('1234')
-    })
-    const user4 = new User({
-        dorsal: '4',
-        nombre: 'Víctor Meseguer',
-        posicion: 'Centrocampista',
-        password: await Funciones.Encrypt('1234')
-    })
-    const user5 = new User({
-        dorsal: '7',
-        nombre: 'Sylla',
-        posicion: 'Delantero',
-        password: await Funciones.Encrypt('1234')
-    })
-    await user1.save()
-    await user2.save()
-    await user3.save()
-    await user4.save()
-    await user5.save()
-    res.status(200).send('Migracion completa OK')
+    try {
+        const fs = require('fs')
+        const FileData = fs.readFileSync('./helper/MigrateDB.json', 'utf8')
+        const jsonData = JSON.parse(FileData)
+        // Cargo Jugadores
+        if (jsonData.jugadores.length < 1) return res.status(500).send('Error, no hay jugadores en MigrateDB.json')
+        await User.deleteMany({})
+        for (const jugador of jsonData.jugadores) {
+            const user = new User(jugador)
+            user.password = await Funciones.Encrypt(jugador.password)
+            await user.save()
+        }
+        res.status(200).send('Migracion completa OK')
+    } catch {
+        res.status(500).send('Error, fallo al leer fichero MigrateDB.json')
+    }
 }
 
 module.exports = {
